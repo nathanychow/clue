@@ -34,14 +34,20 @@ playerHasCard(P, C) :- assert(hasCard(P, C)).
 
 
 %public
+getRemainingWeapons(Remaining) :- initialWeapons(Initial), filter(Initial, Remaining).
+
+%public
+getRemainingRooms(Remaining) :- initialRooms(Initial), filter(Initial, Remaining).
+
+%public
 getRemainingSuspects(RemainingSuspects) :- initialSuspects(Initial),
                                            filterSuspects(Initial, RemainingSuspects).
 
 
-filterSuspects([], []).
-filterSuspects([H|T], [H|T2]) :- not(hasCard(P, H)),
-                                    filterSuspects(T, T2).
-filterSuspects([H|T], Result) :- filterSuspects(T, Result).
+filter([], []).
+filter([H|T], [H|T2]) :- not(hasCard(P, H)),
+                                    filter(T, T2).
+filter([H|T], Result) :- filter(T, Result).
 
 
 
