@@ -1,3 +1,5 @@
+:- module(cards, [initializeCards, playerHasCard/2, getRemainingWeapons/1, getRemainingRooms/1, getRemainingSuspects/1]).
+
 :- dynamic suspect/1.
 :- dynamic room/1.
 :- dynamic weapon/1.
@@ -41,7 +43,7 @@ getRemainingRooms(Remaining) :- initialRooms(Initial), filter(Initial, Remaining
 
 %public
 getRemainingSuspects(RemainingSuspects) :- initialSuspects(Initial),
-                                           filterSuspects(Initial, RemainingSuspects).
+                                           filter(Initial, RemainingSuspects).
 
 
 filter([], []).
