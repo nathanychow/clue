@@ -1,4 +1,4 @@
-:- module(ui).
+:- module(ui, []).
 
 
 printOut(Header, Options, Input) :- write(Header), nl, printOptions(Options, 1), read(N), operateOnN(N, Options, Input).

@@ -1,4 +1,3 @@
-:- use_module(ui).
 :- use_module(cards).
 
 
@@ -10,7 +9,7 @@ startGame :- initializeCards, chooseHeroPlayer.
 initialPlayers(Players) :- Players = ['Miss Scarlet', 'Colonel Mustard', 'Mrs White', 'Mr Green', 'Mrs Peacock', 'Professor Plum'].
 
 
-chooseHeroPlayer :- initialPlayers(Players), ui:printOptions(['A', 'B'], 1),
+chooseHeroPlayer :- initialPlayers(Players), ui:printOut('Choose Your Player', Players, Input),
                     assert(player(1, Input)).
 
 
