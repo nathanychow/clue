@@ -1,4 +1,4 @@
-:- module(cards, [initializeCards, playerHasCard/2, getRemainingWeapons/1, getRemainingRooms/1, getRemainingSuspects/1]).
+:- module(cards, [initializeCards, playerHasCard/2, getRemainingWeapons/1, getRemainingRooms/1, getRemainingSuspects/1, initialSuspects/1, initialWeapons/1, initialRooms/1]).
 
 :- dynamic suspect/1.
 :- dynamic room/1.
