@@ -1,3 +1,4 @@
+:- use_module(clueui).
 :- use_module(cards).
 
 
