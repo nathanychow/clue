@@ -14,5 +14,7 @@ findN(N, [H|T], Input) :- N1 is N - 1, findN(N1, T, Input).
 printOptions([], N).
 printOptions([H|T], N) :- write(N), write(': '), write(H), nl, X is N + 1, printOptions(T, X).
 
+printList([]).
+printList([H|T]) :- write(H), nl, printList(T).
 
-sOut(Header) :- write(Header).
+sOut(Header) :- nl, write(Header), nl, write('------------------------'), nl.
