@@ -3,6 +3,8 @@
 
 
 :- dynamic player/2.
+:- dynamic suggestion/3.
+:- dynamic probability/3.
 
 startGame :- initializeCards, chooseHeroPlayer, chooseOpponentPlayers(2), inputSuspectCards(1), inputWeaponCards(1), inputRoomCards(1), normalGameMenu.
 
@@ -38,7 +40,8 @@ inputRoomCards(N) :- getRemainingRooms(Suspects), ui:printOut('Input Seen Room C
 
 %%%%%%%%
 
-normalGameMenuList(List) :- List = ['I\'m making a suggestion', 'Show me seen cards', 'Show me what\'s left', 'Should I make an accusation?', 'Exit Game'].
+normalGameMenuList(List) :- List = ['I\'m making a suggestion', 'Another player is making a suggestion', 'Show me seen cards', 'Show me what\'s left', 'Should I make an accusation?', 'Exit Game'].
+
 normalGameMenu :- normalGameMenuList(List), ui:printOut('Choose an action', List, Input), !, normalGameChoose(Input), normalGameMenu.
 
 
@@ -65,5 +68,23 @@ normalGameChoose('Show me what\'s left') :- getRemainingSuspects(Suspects), getR
 normalGameChoose('Should I make an accusation?') :- getRemainingSuspects(Suspects), getRemainingWeapons(Weapons), getRemainingRooms(Rooms),
                                                     length(Suspects,Slen), length(Weapons,Wlen), length(Rooms,Rlen), !,
 ((Slen =:= 1, Wlen =:= 1, Rlen =:= 1, ui:sOut('Yes - make suggestion:'),ui:printList(Suspects),ui:printList(Weapons),ui:printList(Rooms)) ; (ui:sOut('Not yet'))).
+
+
+normalGameChoose('Another player is making a suggestion') :- findall(X, player(P, X), [H|Players]),
+                                                                ui:printOut('Which player?', Players, AskingPlayer),
+                                                                initialSuspects(Suspects), initialWeapons(Weapons), initialRooms(Rooms),
+                                                                ui:printOut('Which suspect?', Suspects, SuspectInput),
+                                                                ui:printOut('Which Weapon?', Weapons, WeaponInput),
+                                                                ui:printOut('Which Room?', Rooms, RoomInput),
+                                                                ui:printOut('Who showed a card?', ['Nobody',H|Players], ShowedCard), !,
+                                                                ((not(isNobody(ShowedCard)), player(ShowedCardPlayer, ShowedCard), TempList = [],
+                                                                (cards:hasCard(P, SuspectInput), not(ShowedCardPlayer =:= P), append([], TempList, TempList1) ; append([SuspectInput], TempList, TempList1)),
+                                                                (cards:hasCard(P2, WeaponInput), not(ShowedCardPlayer =:= P2), append([], TempList1, TempList2) ; append([WeaponInput], TempList1, TempList2)),
+                                                                (cards:hasCard(P3, RoomInput), not(ShowedCardPlayer =:= P3), append([], TempList2, FinalList) ; append([RoomInput], TempList2, FinalList)),
+                                                                length(FinalList, FLength),
+                    ((FLength =:= 1, [FinalCard] = FinalList, playerHasCard(ShowedCardPlayer, FinalCard)) ; (FLength > 0, player(N, AskingPlayer), player(N2, ShowedCard), assert(suggestion(N, FinalList, N2))) ; true))
+                                                                ; isNobody(ShowedCard)).
+
+
 
 normalGameChoose('Exit Game') :- false.
