@@ -1,0 +1,61 @@
+Clue Solver 
+by Samantha Leung and Nathan Chow
+
+
+TO START THE GAME
+ - compile using [clue].
+ - start the game using startGame.
+ 
+
+TO INITIALIZE/SET UP THE GAME 
+
+1. Step 1 - Pick your character.
+ - do this by inputting the number corresponding to your character, a period and then enter.
+ - ex: 1. (then press enter).
+ 
+2. Step 2 - Pick your opponent's characters.
+ - It is important that you do this in order clock-wise from your position (assuming that the order of play
+ will be clock-wise).
+ - Enter a number one at a time until all opponents characters have been set.  Then enter 1 to signify that you
+ are done.
+ 
+3. Step 3 - Enter the cards that you hold/any face-up cards.
+ - Again, do this one at a time, entering 1. any time you are done a category of cards.
+ - Once you enter 1. signifying the end of room cards, you will be taken to the running game menu.
+ 
+RUNNING GAME MENU
+
+1. Option 1 - 'I'm making a suggestion'
+ - select this when you are making a suggestion.
+ - the UI will direct you to enter which suspect, weapon, and room you are asking about.
+ - it will then direct you to enter which player showed you a card.
+ - it will then direct you to enter which card that player showed you.
+ 
+2. Option 2 - 'Another player is making a suggestion'
+ - select this when another player is inquiring about cards.
+ - you will be first asked which player is asking.
+ - next, which cards they are asking about.
+ - next, who showed card.
+ 
+3. Option 3 - 'Show me seen cards'
+ - this option will show you all the cards that you have seen. (i.e. cards you know cannot be in the envelope).
+ 
+4. Option 4 - 'Show me what's left'
+ - this option will show you all cards that you have not seen yet. (i.e. do not know with 100% certainty that someone
+ is holding these cards).
+
+5. Option 5 - 'Should I make an accusation?'
+ - this will say Yes and list the cards to accuse if there are only 1 of each category left unseen.
+ - otherwise it wills say not yet.
+ 
+DEDUCTIONS
+
+In addition to marking cards as seen when we make a suggestion (and thus literally see it)
+
+We will mark a card as seen when:
+-- if P1 asks about cards A, B, C.  P2 shows a card.  However we know that cards A and B are not in P2's hand.
+-- Then we will mark C as seen and that P2 has it.
+
+
+
+
