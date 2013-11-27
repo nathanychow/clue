@@ -1,12 +1,13 @@
 :- module(cards, [initializeCards, playerHasCard/2, playerNotHasCard/2, getRemainingWeapons/1, 
                   getRemainingRooms/1, getRemainingSuspects/1, initialSuspects/1, 
-                  initialWeapons/1, initialRooms/1]).
+                  initialWeapons/1, initialRooms/1, addEnvelopeCard/2]).
 
 :- dynamic suspect/1.
 :- dynamic room/1.
 :- dynamic weapon/1.
 :- dynamic hasCard/2.
 :- dynamic noHasCard/2.
+:- dynamic envelope/2. % envelope(Category, Card)
 
 %public
 initializeCards :- initialSuspects(Los),
@@ -37,6 +38,7 @@ initializeRooms([H|T]) :- assert(room(H)), initializeRooms(T).
 %public 
 playerHasCard(P, C) :- assert(hasCard(P, C)).
 playerNotHasCard(P, C) :- assert(noHasCard(P,C)).
+addEnvelopeCard(Cat,C) :- assert(envelope(Cat,C)).
 
 %public
 getRemainingWeapons(Remaining) :- initialWeapons(Initial), filter(Initial, Remaining).
