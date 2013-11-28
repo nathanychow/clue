@@ -1,5 +1,6 @@
 Clue Solver 
-by Samantha Leung and Nathan Chow
+by Samantha Leung (23615099 - v7t7)
+and Nathan Chow (22166094 - n8m7)
 
 
 TO START THE GAME
@@ -41,21 +42,35 @@ RUNNING GAME MENU
  - this option will show you all the cards that you have seen. (i.e. cards you know cannot be in the envelope).
  
 4. Option 4 - 'Show me what's left'
- - this option will show you all cards that you have not seen yet. (i.e. do not know with 100% certainty that someone
- is holding these cards).
+ - this option will show you all cards that you have not seen yet. (i.e. do not know with 100% certainty that someone is holding these cards).
+- Note: it will also include cards you know are in the envelope in this list
 
 5. Option 5 - 'Should I make an accusation?'
  - this will say Yes and list the cards to accuse if there are only 1 of each category left unseen.
- - otherwise it wills say not yet.
+ - otherwise it wills say not yet and lists the envelope cards that are known.
  
+
+
 DEDUCTIONS
 
-In addition to marking cards as seen when we make a suggestion (and thus literally see it)
+- Program keeps track of what a player has, what a player doesn’t have, and suggestions
+that we aren’t sure which card was shown.
 
-We will mark a card as seen when:
--- if P1 asks about cards A, B, C.  P2 shows a card.  However we know that cards A and B are not in P2's hand.
--- Then we will mark C as seen and that P2 has it.
+When a suggestion is made (either ours or another players)
+- P1 asks and P2 shows a card
+- Players between P1 and P2 are marked as not having the suggested cards
+- If we know P2 has a card then we stop, 
+     otherwise we filter out suggested cards that we know P2 doesn’t have
+- If there is one card remaining, then P2 must have that card. Otherwise we store suggestion.
 
 
 
+After every suggestion made:
+- go through list of suggestions and see if we can figure out which card was shown
+- go through all players and see if there are any players we know all the cards for
+      - then we can say they don’t have rest of the cards
+- go through all players, determine which ones have enough cards we know they don’t have
+      - then we can say they have rest of the cards
+- go through all remaining cards and determine if we know which player it belongs to
+- go through all facts to determine which cards are in the envelope
 
